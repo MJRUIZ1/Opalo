@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noticias · Ópalo</title>
+  <link href="libs/bootstrap.min.css" rel="stylesheet"/>
+  <link href="libs/sweetalert2.min.css" rel="stylesheet"/>  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="libs/fonts/chewy/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/600.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/700.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/900.css"/>
+</head>
+<body data-page="noticias">
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <canvas id="starfield"></canvas>
+
+  <div class="page-banner">
+    <div class="page-banner-bg"></div>
+    <div class="page-banner-content reveal">
+      <div class="section-label">Noticias</div>
+      <div class="accent-line"></div>
+      <p class="page-banner-sub">Lo último de Ópalo</p>
+    </div>
+  </div>
+
+  <section style="padding-top:4rem; padding-bottom:6rem;">
+    <div class="section-inner">
+      <div class="noticias-list" id="noticiasList"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Ópalo</div>
+    <p>Chiapas, México · 2026</p>
+    <p style="margin-top:0.5rem;">Cada historia brilla con su propio color</p>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/sweetalert2.all.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="main.js"></script>
+  <script>
+    /* Datos de noticias — agregar aquí nuevas entradas */
+    const noticias = [
+      {
+        fecha:     'Agosto 2024',
+        titulo:    'Nace Ópalo',
+        subtitulo: 'Nace una productora',
+        contenido: 'Un grupo de estudiantes de la Universidad Pablo Guardado Chávez crea la casa productora Estudios Ópalo.'
+      },
+      {
+        fecha:     'Marzo 2026',
+        titulo:    'Estudios Ópalo',
+        subtitulo: 'Desarrollo del talento audiovisual',
+        contenido: 'Lo nuevo está por venir. Estudios Ópalo está preparando su proyecto más importante: Alluzhion, un artbook que mezcla la ficción y la fantasía.'
+      },
+    ];
+
+    /* Renderizar lista */
+    const lista = document.getElementById('noticiasList');
+    noticias.forEach(n => {
+      const item = document.createElement('div');
+      item.className = 'noticia-item reveal';
+      item.innerHTML = `
+        <span class="noticia-date">${n.fecha}</span>
+        <div>
+          <div class="noticia-title">${n.titulo}</div>
+          <div style="font-size:0.8rem;color:rgba(240,232,255,0.4);margin-top:3px;">${n.subtitulo}</div>
+        </div>
+        <span class="noticia-arrow">→</span>`;
+      item.onclick = () => showNoticia(n.titulo, n.contenido);
+      lista.appendChild(item);
+    });
+
+    initReveal();
+  </script>
+</body>
+</html>

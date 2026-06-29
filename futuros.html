@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Futuros Proyectos · Ópalo</title>
+  <link href="libs/bootstrap.min.css" rel="stylesheet"/>
+  <link href="libs/sweetalert2.min.css" rel="stylesheet"/>  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* ── Sección Alluzhion ── */
+    .alluzhion-hero {
+      position: relative;
+      padding: 6rem 0 4rem;
+      overflow: hidden;
+    }
+    .alluzhion-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(107,33,200,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(61,18,120,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .alluzhion-header {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 3rem;
+    }
+    .alluzhion-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--violeta-acento);
+      border: 1px solid rgba(192,132,252,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      margin-bottom: 1.2rem;
+    }
+    .alluzhion-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #f0e8ff 0%, #D8A8FF 40%, #9D4EDD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .alluzhion-subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(216,168,255,0.5);
+      margin-bottom: 2rem;
+    }
+    .alluzhion-desc {
+      max-width: 680px;
+      margin: 0 auto;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(240,232,255,0.72);
+      font-weight: 300;
+      text-align: center;
+    }
+
+    /* ── Video trailer ── */
+    .trailer-wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      margin: 3rem auto 0;
+    }
+    .trailer-label {
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(216,168,255,0.5);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .trailer-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(216,168,255,0.15);
+      box-shadow:
+        0 0 0 1px rgba(216,168,255,0.06),
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(107,33,200,0.2);
+      background: #0a0618;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Placeholder mientras no hay video */
+    .trailer-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      color: rgba(216,168,255,0.3);
+    }
+    .trailer-placeholder svg {
+      width: 56px; height: 56px;
+      opacity: 0.3;
+    }
+    .trailer-placeholder p {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* Video real — quitar display:none cuando tengas el archivo */
+    .trailer-video {
+      display: block; /* ← cambiar a: display: block; cuando tengas el video */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Diseños de personajes ── */
+    .personajes-section {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, transparent, rgba(61,18,120,0.15), transparent);
+    }
+    .personajes-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .personajes-header h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--star-white);
+      margin-bottom: 0.5rem;
+    }
+    .personajes-header p {
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(216,168,255,0.4);
+    }
+
+    /* Grid de personajes */
+    .personajes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .personaje-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(216,168,255,0.12);
+      background: rgba(61,18,120,0.2);
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .personaje-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(216,168,255,0.4);
+      box-shadow: 0 20px 50px rgba(107,33,200,0.25);
+    }
+    .personaje-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block; /* ← cambiar a: display: block; cuando tengas las imágenes */
+    }
+    /* Placeholder de personaje */
+    .personaje-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: rgba(216,168,255,0.25);
+      padding: 1rem;
+      text-align: center;
+    }
+    .personaje-placeholder span:first-child { font-size: 2.5rem; opacity: 0.4; }
+    .personaje-placeholder span:last-child {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .personaje-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem 1rem 1rem;
+      background: linear-gradient(to top, rgba(10,6,24,0.9) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .personaje-card:hover .personaje-overlay { opacity: 1; }
+    .personaje-name {
+      font-family: 'Chewy', serif;
+      font-size: 1rem;
+      color: var(--star-white);
+      letter-spacing: 2px;
+    }
+    .personaje-role {
+      font-size: 0.7rem;
+      color: var(--violeta-acento);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── CTA ── */
+    .futuros-cta {
+      padding: 4rem 0 6rem;
+      text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="libs/fonts/chewy/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/600.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/700.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/900.css"/>
+</head>
+<body data-page="futuros">
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <canvas id="starfield"></canvas>
+
+  <!-- Banner -->
+  <div class="page-banner">
+    <div class="page-banner-bg"></div>
+    <div class="page-banner-content reveal">
+      <div class="section-label">Futuros Proyectos</div>
+      <div class="accent-line"></div>
+      <p class="page-banner-sub">Lo que está por venir</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       ALLUZHION — Descripción + Trailer
+  ══════════════════════════════ -->
+  <section class="alluzhion-hero">
+    <div class="alluzhion-hero-bg"></div>
+    <div class="section-inner">
+
+      <!-- Encabezado -->
+      <div class="alluzhion-header reveal">
+        <span class="alluzhion-badge">Art-Book · En desarrollo</span>
+        <div class="alluzhion-title">ALLUZHION</div>
+        <div class="alluzhion-subtitle">Arte conceptual · Videojuego</div>
+        <p class="alluzhion-desc">
+          ALLUZHION es el arte conceptual de un videojuego sobre MC, un personaje que
+          se adentra en el mundo del consumismo. Deberá derrotar a una serie de "villanos"
+          (influencers) para evitar que su mundo se sumerja en el hiperconsumismo,
+          atravesando mundos de moda, maquillaje y música, con la ayuda de Aluzh y Julieta.
+        </p>
+      </div>
+
+      <!-- Trailer -->
+      <div class="trailer-wrap reveal">
+        <div class="trailer-label">Trailer oficial</div>
+        <div class="trailer-frame">
+
+          <!-- ▶ VIDEO REAL
+               Cuando tengas el archivo, copia el video a img/ y:
+               1. Cambia display:none → display:block en .trailer-video (en el <style> de arriba)
+               2. Actualiza el src de abajo con el nombre de tu archivo
+          -->
+          <video class="trailer-video"
+            src="img/all.mp4"
+            controls
+            poster="img/trailer_poster.jpg">
+            Tu navegador no soporta video HTML5.
+          </video>
+
+          <!-- Placeholder (se oculta automáticamente cuando hay video) -->
+         <!-- <div class="trailer-placeholder" id="trailerPlaceholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
+            </svg>
+            <p>Trailer próximamente</p>
+          </div>-->
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       DISEÑOS DE PERSONAJES
+  ══════════════════════════════ -->
+  <section class="personajes-section">
+    <div class="section-inner">
+
+      <div class="personajes-header reveal">
+        <h2>Diseños de Personajes</h2>
+        <p>Arte conceptual · Alluzhion</p>
+      </div>
+
+      <!--
+        INSTRUCCIONES para agregar imágenes de personajes:
+        1. Copia tus imágenes a la carpeta img/
+        2. En cada .personaje-card, cambia el src de <img> al nombre de tu archivo
+        3. Cambia display:none → display:block en el <img>
+        4. Actualiza el nombre y rol del personaje en .personaje-name y .personaje-role
+        Puedes duplicar o eliminar bloques .personaje-card según cuántos personajes tengas.
+      -->
+      <div class="personajes-grid" id="personajesGrid">
+
+        <!-- Personaje 1 -->
+        <div class="personaje-card reveal" style="transition-delay:0.05s" onclick="openPersonaje('MC MUJER','Protagonista','img/mc.gif')">
+          <img class="personaje-img" src="img/mc.gif" alt="MC"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>MC MUJER</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">MC</div>
+            <div class="personaje-role">Protagonista</div>
+          </div>
+        </div>
+
+        <!-- Personaje 2 -->
+        <div class="personaje-card reveal" style="transition-delay:0.15s" onclick="openPersonaje('MC HOMBRE','Protagonista','img/mch.gif')">
+          <img class="personaje-img" src="img/mch.gif" alt="MCH"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>MC HOMBRE</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">MC</div>
+            <div class="personaje-role">Protagonista</div>
+          </div>
+        </div>
+
+        <!-- Personaje 3 -->
+        <div class="personaje-card reveal" style="transition-delay:0.1s" onclick="openPersonaje('Aluzh','Aliada','img/alz.gif')">
+          <img class="personaje-img" src="img/alz.gif" alt="Aluzh"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>Aluzh</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">Aluzh</div>
+            <div class="personaje-role">Aliado</div>
+          </div>
+        </div>
+
+        <!-- Personaje 4 -->
+        <div class="personaje-card reveal" style="transition-delay:0.15s" onclick="openPersonaje('Julieta','Aliada','img/ju.png')">
+          <img class="personaje-img" src="img/ju.png" alt="Julieta"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>Julieta</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">Julieta</div>
+            <div class="personaje-role">Aliada</div>
+          </div>
+        </div>
+
+        <!-- Personaje 5 -->
+        <div class="personaje-card reveal" style="transition-delay:0.2s" onclick="openPersonaje('Coneja','Starter · Belleza','img/cn.jpeg')">
+          <img class="personaje-img" src="img/cn.jpeg" alt="Villano 1"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>Starters</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">Coneja</div>
+            <div class="personaje-role">Starter· Belleza</div>
+          </div>
+        </div>
+
+        <!-- Personaje 6 -->
+        <div class="personaje-card reveal" style="transition-delay:0.25s" onclick="openPersonaje('Ajolote','Starter · Venta por Catálogo','img/aj.jpeg')">
+          <img class="personaje-img" src="img/aj.jpeg" alt="Villano 2"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>Starters</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">Ajolote</div>
+            <div class="personaje-role">Starter · Venta por Catálogo </div>
+          </div>
+        </div>
+
+        <!-- Personaje 7
+        <div class="personaje-card reveal" style="transition-delay:0.3s" onclick="openPersonaje('Villano 3','Influencer · Música','img/personaje_villano3.jpg')">
+          <img class="personaje-img" src="img/personaje_villano3.jpg" alt="Villano 3"/>
+          <div class="personaje-placeholder">
+            <span>✦</span>
+            <span>Villano 3</span>
+          </div>
+          <div class="personaje-overlay">
+            <div class="personaje-name">Villano 3</div>
+            <div class="personaje-role">Influencer · Música</div>
+          </div>
+        </div>-->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="futuros-cta">
+    <div class="section-inner reveal">
+      <div class="slogan-stars" style="justify-content:center;display:flex;gap:8px;margin-bottom:1.5rem;">
+        <div class="slogan-star"></div>
+        <div class="slogan-star"></div>
+        <div class="slogan-star"></div>
+      </div>
+      <h2 style="font-family:'Cinzel Decorative',serif;font-size:clamp(1.2rem,3vw,2rem);color:var(--star-white);margin-bottom:1rem;">¿Tienes una historia?</h2>
+      <p style="color:rgba(240,232,255,0.6);font-size:0.95rem;line-height:1.8;max-width:500px;margin:0 auto 2rem;">Estamos abiertos a nuevas colaboraciones. Si quieres contar una historia de nuestra región, escríbenos.</p>
+      <button class="lang-btn" style="padding:12px 36px;font-size:0.9rem;letter-spacing:2px;" onclick="showColabCTA()">Contáctanos →</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Ópalo</div>
+    <p>Chiapas, México · 2026</p>
+    <p style="margin-top:0.5rem;">Cada historia brilla con su propio color</p>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/sweetalert2.all.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="main.js"></script>
+  <script>
+    initReveal();
+
+    /* Popup de personaje al hacer clic */
+    function openPersonaje(nombre, rol, imgSrc) {
+      const imgTag = `<img src="${imgSrc}"
+        onerror="this.style.display='none'"
+        style="width:100%;max-height:320px;object-fit:contain;border-radius:12px;margin-bottom:1rem;"
+        alt="${nombre}">`;
+      Swal.fire({
+        title: `<span style="font-family:'Cinzel Decorative',serif;color:#D8A8FF">${nombre}</span>`,
+        html: `${imgTag}
+          <p style="color:var(--violeta-acento);letter-spacing:3px;font-size:0.75rem;text-transform:uppercase">${rol}</p>`,
+        confirmButtonText: 'Cerrar',
+        background: '#0a0618',
+        color: '#f0e8ff',
+        confirmButtonColor: '#D8A8FF',
+        backdrop: 'rgba(10,6,24,0.9)',
+        width: '480px',
+      });
+    }
+
+    function showColabCTA() {
+      Swal.fire({
+        title: `<span style="font-family:'Cinzel Decorative',serif;color:#D8A8FF">Contáctanos</span>`,
+        html: `<div style="font-family:'Raleway',sans-serif;color:rgba(240,232,255,0.75);line-height:2">
+          <p>📧 <strong style="color:#D8A8FF">opalo@gmail.com</strong></p>
+          <p>📍 Tuxtla Gutiérrez, Chiapas, México</p>
+          <p>📱 @estudios_opalo</p>
+        </div>`,
+        confirmButtonText: 'Cerrar',
+        background: '#0a0618', color: '#f0e8ff', confirmButtonColor: '#D8A8FF',
+        backdrop: 'rgba(10,6,24,0.9)'
+      });
+    }
+  </script>
+</body>
+</html>

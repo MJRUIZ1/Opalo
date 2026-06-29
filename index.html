@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ópalo · Inicio</title>
+  <link href="libs/bootstrap.min.css" rel="stylesheet"/>
+  <link href="libs/sweetalert2.min.css" rel="stylesheet"/>  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="libs/fonts/chewy/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/600.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/700.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/900.css"/>
+</head>
+<body data-page="index">
+
+
+  <!-- Fondo estrellado -->
+  <canvas id="starfield"></canvas>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="home">
+    <div class="parallax-layer layer-nebula" data-speed="0.08"></div>
+
+    <!-- Planetas -->
+    <div class="planet-wrap planet-1" data-speed="0.12">
+      <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="p1g" cx="35%" cy="35%">
+            <stop offset="0%"   stop-color="#9b6fc9"/>
+            <stop offset="50%"  stop-color="#512f5c"/>
+            <stop offset="100%" stop-color="#1a0e2e"/>
+          </radialGradient>
+          <radialGradient id="p1spec" cx="30%" cy="30%">
+            <stop offset="0%"   stop-color="rgba(255,255,255,0.4)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="90" fill="url(#p1g)"/>
+        <ellipse cx="80" cy="95" rx="55" ry="18" fill="none" stroke="rgba(246,166,232,0.25)" stroke-width="1.5"/>
+        <ellipse cx="110" cy="105" rx="45" ry="14" fill="none" stroke="rgba(237,158,111,0.2)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="90" fill="url(#p1spec)"/>
+      </svg>
+    </div>
+    <div class="planet-wrap planet-2" data-speed="0.18">
+      <svg width="130" height="130" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="p2g" cx="40%" cy="35%">
+            <stop offset="0%"   stop-color="#6aaecc"/>
+            <stop offset="60%"  stop-color="#1f5a7a"/>
+            <stop offset="100%" stop-color="#0d0618"/>
+          </radialGradient>
+        </defs>
+        <circle cx="65" cy="65" r="55" fill="url(#p2g)" opacity="0.85"/>
+        <ellipse cx="65" cy="65" rx="52" ry="16" fill="none" stroke="rgba(106,174,204,0.2)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="planet-wrap planet-3" data-speed="0.1">
+      <svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="p3g" cx="40%" cy="35%">
+            <stop offset="0%"   stop-color="#d4856b"/>
+            <stop offset="55%"  stop-color="#7a3045"/>
+            <stop offset="100%" stop-color="#1a0e2e"/>
+          </radialGradient>
+        </defs>
+        <circle cx="55" cy="55" r="48" fill="url(#p3g)" opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="planet-wrap planet-4" data-speed="0.22">
+      <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="p4g" cx="35%" cy="30%">
+            <stop offset="0%"   stop-color="#c8a0e8"/>
+            <stop offset="100%" stop-color="#3b1f5e"/>
+          </radialGradient>
+        </defs>
+        <circle cx="30" cy="30" r="26" fill="url(#p4g)" opacity="0.8"/>
+      </svg>
+    </div>
+
+    <!-- Asteroides -->
+    <div class="rock rock-1" data-speed="0.25">
+      <svg width="70" height="55" viewBox="0 0 70 55" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,40 5,20 20,5 45,2 62,15 65,35 50,52 25,50" fill="#2d1244" stroke="rgba(246,166,232,0.3)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="rock rock-2" data-speed="0.3">
+      <svg width="50" height="42" viewBox="0 0 50 42" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="8,30 3,15 15,4 32,2 44,12 46,28 35,40 18,38" fill="#1d0f35" stroke="rgba(237,158,111,0.3)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="rock rock-3" data-speed="0.2">
+      <svg width="40" height="32" viewBox="0 0 40 32" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="5,22 3,10 12,3 26,1 35,9 36,22 26,30 12,29" fill="#250e2c" stroke="rgba(246,166,232,0.2)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="rock rock-4" data-speed="0.15">
+      <svg width="28" height="22" viewBox="0 0 28 22" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="4,16 2,7 9,2 18,1 24,7 25,16 18,21 8,20" fill="#3b1f5e" stroke="rgba(246,166,232,0.25)" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <!-- Contenido hero -->
+    <div class="hero-content">
+      <div class="hero-logo reveal">
+        <img src="img/opblanco.png" alt="Ópalo"/>
+      </div>
+      <p class="hero-tagline reveal">"Cada historia brilla con su propio color"</p>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--pink-glow)" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── Origen ── -->
+  <section id="origen">
+    <div class="origen-bg" id="origenBg"></div>
+    <div class="origen-overlay"></div>
+    <div class="origen-content reveal">
+      <span class="origen-eyebrow">Quiénes somos</span>
+      <div class="section-label">Origen</div>
+      <div class="accent-line"></div>
+      <p class="origen-desc">Nacimos en el corazón de Chiapas, una tierra donde cada paisaje cuenta una historia única. Nuestra agencia surge de la pasión por preservar y proyectar las narrativas que dan vida a las comunidades y culturas de nuestra región.</p>
+      <p class="origen-desc">Con raíces profundas en nuestro territorio, creemos que cada proyecto es una oportunidad para dar voz a historias que merecen ser contadas al mundo.</p>
+    </div>
+    <div class="section-divider"></div>
+  </section>
+
+  <!-- ── Filosofía ── -->
+  <section id="filosofia">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Filosofía Empresarial</div>
+        <div class="accent-line"></div>
+      </div>
+      <div class="cards-row">
+        <div class="phil-card reveal" style="transition-delay:0.1s">
+          <h3>Misión</h3>
+          <p>Dar voz a las historias que merecen ser contadas, creando contenido audiovisual de alta calidad que conecta comunidades y culturas con el mundo, preservando la identidad y el patrimonio de nuestra tierra.</p>
+        </div>
+        <div class="phil-card reveal" style="transition-delay:0.2s">
+          <h3>Visión</h3>
+          <p>Ser la agencia de producción audiovisual referente del sureste mexicano, reconocida por nuestra autenticidad, creatividad y compromiso con las narrativas que transforman y enriquecen la cultura visual contemporánea.</p>
+        </div>
+        <div class="phil-card reveal" style="transition-delay:0.3s">
+          <h3>Valores</h3>
+          <p>Autenticidad, creatividad sin límites, respeto por las culturas que retratamos, compromiso con la excelencia y pasión genuina por cada proyecto que da vida a las historias de nuestra región.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+  </section>
+
+  <!-- ── Slogan ── -->
+  <section id="slogan">
+    <div class="slogan-wrap section-inner reveal">
+      <div class="slogan-stars">
+        <div class="slogan-star"></div>
+        <div class="slogan-star"></div>
+        <div class="slogan-star"></div>
+      </div>
+      <div class="slogan-quote">"Cada historia<br>brilla con su<br>propio color"</div>
+      <div class="slogan-tag">— Slogan Ópalo</div>
+    </div>
+  </section>
+
+  <!-- ── Equipo ── -->
+  <section id="equipo">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Equipo</div>
+        <div class="accent-line"></div>
+      </div>
+      <div class="team-grid" id="teamGrid"></div>
+    </div>
+    <div class="section-divider"></div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-logo">ópalo</div>
+    <p>Chiapas, México · 2026</p>
+    <p style="margin-top:0.5rem;">Cada historia brilla con su propio color</p>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/sweetalert2.all.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="main.js"></script>
+  <script>
+    /* Datos del equipo — descripción propia por integrante */
+    const team = [
+      {
+        name: 'Max', role: 'Área de Ilustración', init: 'M', color: '#7b4fa0',
+        desc: 'Ilustrador principal de Ópalo. Da vida visual a los mundos y personajes de cada proyecto con un estilo único que mezcla lo tradicional y lo digital.'
+      },
+      {
+        name: 'Hedda', role: 'Área de Conceptualización', init: 'H', color: '#512f5c',
+        desc: 'La mente creativa detrás de las ideas. Hedda desarrolla los conceptos narrativos y artísticos que guían cada proyecto desde su origen hasta su forma final.'
+      },
+      {
+        name: 'Rocío', role: 'Área de Modelado 3D', init: 'R', color: '#9b6fc9',
+        desc: 'Especialista en modelado y animación 3D. Rocío construye los entornos y personajes tridimensionales que dan profundidad y textura a las historias de Ópalo.'
+      },
+      {
+        name: 'Majo', role: 'Área de Programación', init: 'M', color: '#b66570',
+        desc: 'Desarrolladora del equipo. Majo transforma los diseños en experiencias interactivas funcionales, siendo la arquitecta técnica detrás de proyectos como El viaje del Café.'
+      },
+      {
+        name: 'Gabo', role: 'Área de Edición', init: 'G', color: '#3b7a8a',
+        desc: 'Editor audiovisual de Ópalo. Gabo ensambla, ritma y pule cada pieza hasta que la narrativa visual fluye exactamente como fue concebida.'
+      },
+    ];
+    const tGrid = document.getElementById('teamGrid');
+    team.forEach((m, i) => {
+      const card = document.createElement('div');
+      card.className = 'team-card reveal';
+      card.style.transitionDelay = (i * 0.1) + 's';
+      card.innerHTML = `
+        <div class="team-avatar" style="background:linear-gradient(135deg,${m.color},#1a0e2e)">${m.init}</div>
+        <div class="team-name">${m.name}</div>
+        <div class="team-role">${m.role}</div>`;
+      card.onclick = () => showTeam(m);
+      tGrid.appendChild(card);
+    });
+
+    /* Init */
+    initParallax();
+    initOrigenParallax();
+    initReveal();
+    (function () {
+      const RATING_KEY = 'opalo-rating-done';
+      if (sessionStorage.getItem(RATING_KEY)) return;
+
+      setTimeout(function () {
+        if (typeof window.Swal === 'undefined') return;
+
+        let selected = 0;
+
+        window.Swal.fire({
+          title: '<span style="font-family:\'Chewy\',serif;font-size:1.4rem;color:#D8A8FF">¿Qué te parece nuestro sitio?</span>',
+          html: `
+            <p style="color:rgba(240,232,255,0.6);font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem">Califica tu experiencia</p>
+            <div id="swal-stars" style="display:flex;justify-content:center;gap:10px;margin-bottom:1.2rem">
+              ${[1,2,3,4,5].map(n => `
+                <span data-star="${n}"
+                  style="font-size:2.2rem;cursor:pointer;transition:transform 0.15s,filter 0.15s;filter:grayscale(1) brightness(0.5);user-select:none"
+                  onmouseenter="hoverStars(${n})"
+                  onmouseleave="resetStars()"
+                  onclick="selectStar(${n})">★</span>
+              `).join('')}
+            </div>
+            <p id="swal-star-label" style="color:rgba(240,232,255,0.45);font-size:0.8rem;letter-spacing:1px;min-height:20px;transition:opacity 0.2s"></p>
+            <textarea id="swal-comment"
+              placeholder="¿Tienes algún comentario? (opcional)"
+              style="width:100%;margin-top:1rem;padding:10px 14px;border-radius:10px;border:1px solid rgba(216,168,255,0.25);background:rgba(61,18,120,0.2);color:#f0e8ff;font-family:'Raleway',sans-serif;font-size:0.85rem;resize:none;height:80px;outline:none;box-sizing:border-box;"
+            ></textarea>
+          `,
+          background: '#0f0828',
+          color: '#f0e8ff',
+          confirmButtonText: 'Enviar ✦',
+          confirmButtonColor: '#7C3AED',
+          cancelButtonText: 'Ahora no',
+          showCancelButton: true,
+          cancelButtonColor: 'transparent',
+          backdrop: 'rgba(10,6,24,0.88)',
+          didOpen: () => {
+            const labels = ['', 'Muy malo', 'Malo', 'Regular', 'Bueno', '¡Excelente!'];
+            const colors = ['', '#ef4444', '#f97316', '#eab308', '#84cc16', '#a855f7'];
+
+            window.hoverStars = function (n) {
+              document.querySelectorAll('#swal-stars span').forEach((s, i) => {
+                s.style.filter    = i < n ? 'grayscale(0) brightness(1.1)' : 'grayscale(1) brightness(0.5)';
+                s.style.color     = i < n ? colors[n] : '';
+                s.style.transform = i < n ? 'scale(1.15)' : 'scale(1)';
+              });
+              const lbl = document.getElementById('swal-star-label');
+              if (lbl) { lbl.textContent = labels[n]; lbl.style.color = colors[n]; }
+            };
+            window.resetStars = function () {
+              if (selected > 0) { hoverStars(selected); return; }
+              document.querySelectorAll('#swal-stars span').forEach(s => {
+                s.style.filter = 'grayscale(1) brightness(0.5)';
+                s.style.transform = 'scale(1)';
+              });
+              const lbl = document.getElementById('swal-star-label');
+              if (lbl) lbl.textContent = '';
+            };
+            window.selectStar = function (n) {
+              selected = n;
+              hoverStars(n);
+              document.querySelectorAll('#swal-stars span').forEach((s, i) => {
+                if (i < n) {
+                  s.style.transform = 'scale(1.3)';
+                  setTimeout(() => { s.style.transform = 'scale(1.15)'; }, 150);
+                }
+              });
+            };
+          },
+          preConfirm: () => {
+            if (selected === 0) {
+              window.Swal.showValidationMessage('Por favor selecciona una calificación ★');
+              return false;
+            }
+            return {
+              estrellas: selected,
+              comentario: document.getElementById('swal-comment')?.value?.trim() || ''
+            };
+          }
+        }).then(result => {
+          delete window.hoverStars;
+          delete window.resetStars;
+          delete window.selectStar;
+
+          sessionStorage.setItem(RATING_KEY, '1');
+
+          if (result.isConfirmed && result.value) {
+            const msgs = ['', '😔 Gracias por tu honestidad.', '🙁 Tomaremos en cuenta tu opinión.', '😊 ¡Gracias por tu opinión!', '😄 ¡Nos alegra que te gustara!', '🌟 ¡Muchas gracias! Eso nos motiva mucho.'];
+            _swal({
+              title: `<span style="color:#D8A8FF">¡Gracias por calificarnos!</span>`,
+              html: `
+                <p style="font-size:2rem;margin:0.5rem 0">${'★'.repeat(result.value.estrellas)}<span style="color:rgba(240,232,255,0.2)">${'★'.repeat(5 - result.value.estrellas)}</span></p>
+                <p style="color:rgba(240,232,255,0.75);font-size:0.95rem;margin-top:0.5rem">${msgs[result.value.estrellas]}</p>
+                ${result.value.comentario ? `<p style="color:rgba(216,168,255,0.6);font-size:0.82rem;margin-top:0.8rem;font-style:italic">"${result.value.comentario}"</p>` : ''}
+              `,
+              confirmButtonText: 'Cerrar',
+              ...swalTheme
+            });
+          }
+        });
+      }, 10000); /* 10 segundos */
+    })();
+  </script>
+</body>
+</html>

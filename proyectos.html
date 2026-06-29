@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proyectos · Ópalo</title>
+  <link href="libs/bootstrap.min.css" rel="stylesheet"/>
+  <link href="libs/sweetalert2.min.css" rel="stylesheet"/>  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* Imagen real en tarjeta del carrusel */
+    .c-card-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+    .c-card:hover .c-card-img { transform: scale(1.04); }
+
+    /* Si no hay imagen, usa el gradiente de fondo */
+    .c-card-img.no-img {
+      background: var(--grad);
+      background-size: 200% 200%;
+      animation: gradShift 8s ease infinite alternate;
+    }
+  </style>
+  <link rel="stylesheet" href="libs/fonts/chewy/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/300-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/400-italic.css"/>
+  <link rel="stylesheet" href="libs/fonts/raleway/600.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/400.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/700.css"/>
+  <link rel="stylesheet" href="libs/fonts/cinzel-decorative/900.css"/>
+</head>
+<body data-page="proyectos">
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <canvas id="starfield"></canvas>
+
+  <div class="page-banner">
+    <div class="page-banner-bg"></div>
+    <div class="page-banner-content reveal">
+      <div class="section-label">Proyectos</div>
+      <div class="accent-line"></div>
+      <p class="page-banner-sub">Historias que hemos llevado a la vida</p>
+    </div>
+  </div>
+
+  <section id="proyectos">
+    <div class="carousel-stage" id="carouselStage">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Las tarjetas se generan desde el array de abajo -->
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="c-btn" id="cPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="c-dots" id="cDots"></div>
+      <button class="c-btn" id="cNext" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Ópalo</div>
+    <p>Chiapas, México · 2026</p>
+    <p style="margin-top:0.5rem;">Cada historia brilla con su propio color</p>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/sweetalert2.all.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="main.js"></script>
+  <script>
+    /* ══════════════════════════════════════════════
+       PROYECTOS — Edita aquí para agregar / cambiar
+       ══════════════════════════════════════════════
+       img:  ruta relativa dentro de img/
+             Si no tienes imagen aún, pon null y
+             se mostrará el gradiente de color.
+       grad: gradiente de respaldo (cuando img = null)
+    */
+    const proyectos = [
+      {
+        title: 'El costo de un Click',
+        tag:   'Corto Híbrido',
+        desc:  'Corto híbrido entre 2D y live-action que relata la historia de una chica que vive en un mundo consumido por el Fast Fashion.',
+        img:   'img/costo.gif',   // ← pon 'img/click.jpg' cuando tengas la imagen
+        grad:  'linear-gradient(145deg,#1a0a2e,#4a1060,#8a2040)'
+      },
+      {
+        title: 'El cuarto Sol',
+        tag:   'Novela Visual',
+        desc:  'Novela visual sobre la leyenda del cuarto sol con Tlaloc y Chalchihuitlicue como protagonistas.',
+        img:   'img/cuarto.gif',   // ← pon 'img/sol.jpg' cuando tengas la imagen
+        grad:  'linear-gradient(145deg,#0a1a3a,#1a4a6a,#0a6a5a)'
+      },
+      {
+        title: 'El viaje del Café',
+        tag:   'Sistema Interactivo',
+        desc:  'Sistema interactivo donde se cuenta el proceso de elaboración del café, guiado por el personaje Coaffe.',
+        img:   'img/cafe.gif',   // ← pon 'img/cafe.jpg' cuando tengas la imagen
+        grad:  'linear-gradient(145deg,#2a1a0a,#6a3a10,#c06020)'
+      },
+    ];
+
+    /* ── Generar tarjetas ── */
+    const track = document.getElementById('carouselTrack');
+    proyectos.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'c-card';
+      card.dataset.index = i;
+      if (!p.img) card.style.setProperty('--grad', p.grad);
+
+      const imgDiv = document.createElement('div');
+      imgDiv.className = 'c-card-img' + (p.img ? '' : ' no-img');
+      if (p.img) imgDiv.style.backgroundImage = `url('${p.img}')`;
+
+      card.innerHTML = `
+        <div class="c-card-label">
+          <span class="c-card-tag">${p.tag}</span>
+          <span class="c-card-title">${p.title}</span>
+        </div>`;
+      card.insertBefore(imgDiv, card.firstChild);
+      track.appendChild(card);
+    });
+
+    /* ── Carrusel 3D ── */
+    (function () {
+      const CARDS  = document.querySelectorAll('.c-card');
+      const N      = CARDS.length;
+      const dotsEl = document.getElementById('cDots');
+      let current  = Math.floor(N / 2);
+      let isDragging = false, startX = 0, diffX = 0;
+
+      CARDS.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'c-dot';
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      });
+
+      function render() {
+        CARDS.forEach((card, i) => {
+          const offset  = i - current;
+          const abs     = Math.abs(offset);
+          const rotY    = offset * 38;
+          const tx      = offset * 220;
+          const tz      = -abs * 110;
+          const scale   = abs === 0 ? 1 : abs === 1 ? 0.78 : 0.60;
+          const opacity = abs === 0 ? 1 : abs === 1 ? 0.72 : abs === 2 ? 0.45 : 0;
+
+          card.style.transform     = `translateX(${tx}px) translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`;
+          card.style.opacity       = opacity;
+          card.style.zIndex        = 10 - abs;
+          card.style.pointerEvents = abs <= 1 ? 'auto' : 'none';
+          card.classList.toggle('c-card--active', offset === 0);
+          card.onclick = abs === 0 ? () => openCard(i) : () => goTo(i);
+        });
+        document.querySelectorAll('.c-dot').forEach((d, i) =>
+          d.classList.toggle('c-dot--active', i === current)
+        );
+      }
+
+      function goTo(idx) { current = ((idx % N) + N) % N; render(); }
+
+      function openCard(i) {
+        const p = proyectos[i];
+        if (typeof Swal === 'undefined') return;
+        Swal.fire({
+          background: '#12082a',
+          color: '#f0e8ff',
+          confirmButtonColor: '#D8A8FF',
+          title: `<span style="font-family:'Chewy',serif;letter-spacing:2px;color:#f0e8ff">${p.title}</span>`,
+          html: `
+            ${p.img ? `<img src="${p.img}" style="width:100%;border-radius:10px;margin-bottom:1rem;object-fit:cover;max-height:200px;" alt="${p.title}">` : ''}
+            <p style="font-family:Raleway,sans-serif;color:rgba(240,232,255,.7);line-height:1.8">${p.desc}</p>`,
+          confirmButtonText: 'Cerrar',
+        });
+      }
+
+      document.getElementById('cPrev').addEventListener('click', () => goTo(current - 1));
+      document.getElementById('cNext').addEventListener('click', () => goTo(current + 1));
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+
+      const stage = document.getElementById('carouselStage');
+      stage.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; });
+      stage.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('mousemove',  e => { if (isDragging) diffX = e.clientX - startX; });
+      stage.addEventListener('touchmove',  e => { if (isDragging) diffX = e.touches[0].clientX - startX; }, { passive: true });
+      function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        if (diffX < -60) goTo(current + 1);
+        else if (diffX > 60) goTo(current - 1);
+        diffX = 0;
+      }
+      stage.addEventListener('mouseup',    endDrag);
+      stage.addEventListener('touchend',   endDrag);
+      stage.addEventListener('mouseleave', endDrag);
+
+      render();
+    })();
+
+    initReveal();
+  </script>
+</body>
+</html>
